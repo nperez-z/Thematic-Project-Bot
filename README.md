@@ -14,8 +14,7 @@ To set up and run the bot, you will need the following:
 
 ### 1. Clone the Repository
 ```sh
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/Kek-Lord/Thematic-Project-Bot
 ```
 
 ### 2. Install Dependencies
