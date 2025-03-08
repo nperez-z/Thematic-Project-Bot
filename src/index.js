@@ -37,6 +37,7 @@ for (const folder of commandsFolders) {
 	}
 }
 
+const eventsPath = path.join(__dirname, 'Events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
@@ -48,6 +49,15 @@ for (const file of eventFiles) {
 	else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
+}
+
+const auditLogPath = path.join(__dirname, 'audit-log');
+const auditLogFiles = fs.readdirSync(auditLogPath).filter(file => file.endsWith('.js'));
+
+for (const file of auditLogFiles) {
+    const filePath = path.join(auditLogPath, file);
+    const event = require(filePath);
+    client.on(event.name, (...args) => event.execute(...args));
 }
 
 // Log in to Discord with your client's token
