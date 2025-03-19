@@ -6,6 +6,7 @@ const { Client, Collection, IntentsBitField } = require('discord.js');
 
 dotenv.config();
 
+
 // Create a new client instance
 const client = new Client({
 	intents: [

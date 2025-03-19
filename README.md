@@ -1,7 +1,7 @@
 # Discord Bot
 
 ## Overview
-This is a Discord bot built with JavaScript using Node.js. The bot currently only responds to a /ping command, replying with "Pong!"
+This is a Discord bot built with JavaScript using Node.js. The bot currently has an ai gamer personality and will reply with /ping.
 ## Prerequisites
 To set up and run the bot, you will need the following:
 
@@ -9,6 +9,7 @@ To set up and run the bot, you will need the following:
 - [Git](https://git-scm.com/) (Optional, but useful for version control)
 - A Discord bot token (see setup guide below)
 - The bot's `GUILD_ID` and `CLIENT_ID` (see setup guide below)
+- **Gemini API Key** (see instructions below to obtain)
 
 ## Installation
 
@@ -31,9 +32,10 @@ Create a `.env` file in the root directory and add the following:
 DISCORD_TOKEN=your-bot-token
 GUILD_ID=your-guild-id
 CLIENT_ID=your-client-id
+GEMINI_API_KEY=your-gemini-api-key
 ```
 
-Replace `your-bot-token`, `your-guild-id`, and `your-client-id` with actual values obtained from the Discord Developer Portal.
+Replace `your-bot-token`, `your-guild-id`, `your-client-id`, and `your-gemini-api-key` with actual values obtained from the Discord Developer Portal.
 
 ## Setting Up the Bot on Discord Developer Portal
 
@@ -65,6 +67,39 @@ If the above invite gives the error when running the command to deploy the slash
 4. Scroll down, and give administrator permissions for ensuring it will work.
 5. Copy the URL and paste it into your browser. You may need to kick the bot, then re-invite it with the URL if this doesn't help. (also make sure to get the new client_id from the bot, as it will change if you kick and re-invite it)
 
+## Getting the Gemini API Key (Free Version)
+
+To use the Gemini API (free version) for generating responses with your Discord bot, follow these steps:
+
+### 1. Sign Up for Google Cloud
+- Visit the [Google Cloud Console](https://console.cloud.google.com/).
+- If you don’t have a Google account, create one, and then sign in.
+
+### 2. Create a New Project
+- In the Google Cloud Console, click on the **Select a project** dropdown at the top.
+- Click **New Project** and enter a name for your project.
+- Click **Create**.
+
+### 3. Enable the Gemini API
+- In the **Google Cloud Console**, go to the **API & Services** > **Library**.
+- Search for "Gemini API" or "Google Generative AI".
+- Click on **Google Generative AI API** and then click **Enable**.
+
+### 4. Side note:
+- Do not enable billing or give any payment information as if you do, and use the incorrect version you could be charged.
+- You do not need to enable billing to use the free tier for the api and I would not suggest doing so.
+
+### 5. Get Your API Key
+- In the **Google Cloud Console**, go to **APIs & Services** > **Credentials**.
+- Click **Create Credentials** and select **API Key**.
+- Your new API key will appear. Copy it and save it somewhere safe.
+
+### 6. Add the API Key to Your Project
+- Go to your project folder.
+- In the `.env` file, add the following line, replacing `your-gemini-api-key` with the key you just copied:
+
+
+
 ## Running the Bot
 Once everything is set up, start the bot with:
 ```sh
@@ -74,8 +109,9 @@ node index.js
 ## Deploying Slash Commands
 To actually use the slash commands, you need to deploy them with the script below:
 ```sh
-node interactionCreate.js
+node deploy-commands.js
 ```
+
 Side note: if the command isn't working, check which directory your terminal is in, and cd into the corresponding directory.
 
 ## Contributing
