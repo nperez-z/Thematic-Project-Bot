@@ -1,7 +1,7 @@
 # Discord Bot
 
 ## Overview
-This is a Discord bot built with JavaScript using Node.js. The bot currently has an ai gamer personality and will reply with /ping.
+This is a Discord bot built with JavaScript using Node.js. The bot currently has an ai gamer personality and will reply with /ping. The bot will also log deleted messages to an admin channel.
 ## Prerequisites
 To set up and run the bot, you will need the following:
 
@@ -113,6 +113,34 @@ node deploy-commands.js
 ```
 
 Side note: if the command isn't working, check which directory your terminal is in, and cd into the corresponding directory.
+
+## Message Deletion Logging
+
+### How it Works
+1. The bot listens for the `messageDelete` event.
+2. The bot checks if `admin-bot-chat` channel exists:
+   - If the channel exists, the bot posts the details of the deleted message to the channel.
+   - If the channel doesn't exist, the bot creates it with admin permissions.
+3. The bot then logs the author, message content and who deleted the message to the channel.
+
+### Requirements
+To ensure this feature works correctly, the following conditions must be met:
+1. **Bot Permissions**:
+   - The bot must have the `Manage Channels` permission to create the `admin-bot-chat` channel if it does not exist.
+   - The bot must have the `View Audit Log` permission to identify who deleted the message.
+   - The bot must have the `Send Messages` permission in the `admin-bot-chat` channel.
+
+2. **Server Configuration**:
+   - The server must allow the bot to access audit logs for accurate logging of message deletions.
+
+3. **Role Hierarchy**:
+   - The bot's role must be higher than the roles of users whose actions it is logging to ensure it can access the necessary data.
+
+### Notes
+- If the bot fails to create the `admin-bot-chat` channel or send a message to it, an error will be logged in the console.
+- The `admin-bot-chat` channel is created with the following permissions:
+  - Hidden from all members (`@everyone` role).
+  - Visible and writable only by the bot and server administrators.
 
 ## Contributing
 1. **Create a new branch** before making changes: `git checkout -b feature-name`
