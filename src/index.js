@@ -58,7 +58,11 @@ const auditLogFiles = fs.readdirSync(auditLogPath).filter(file => file.endsWith(
 for (const file of auditLogFiles) {
     const filePath = path.join(auditLogPath, file);
     const event = require(filePath);
-    client.on(event.name, (...args) => event.execute(...args));
+	console.log(`Registering event: ${event.name}`);
+    client.on(event.name, (...args) => {
+		console.log(`Event triggered: ${event.name}`);
+		event.execute(...args);
+	});
 }
 
 // Log in to Discord with your client's token
