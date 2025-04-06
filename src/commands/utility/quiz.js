@@ -13,7 +13,7 @@ module.exports = {
 				answer: "C"
 			},{
 				question: "What planet is closest to the sun?",
-				options: ["A) Earth", "B) Mars", "C) Venus", "D) Jupiter"],
+				options: ["A) Earth", "B) Mercury", "C) Venus", "D) Jupiter"],
 				answer: "B"
 			},{
 				question: "In darts, what's the most points you can score with a single throw? ",
