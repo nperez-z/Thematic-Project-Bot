@@ -32,10 +32,10 @@ module.exports = {
 
         // If the user has sent more messages than allowed, warn them and delete the latest message
         if (timestamps.length > SPAM_THRESHOLD) {
-            // Send a warning (using a reply or a channel message)
+            // Send a warning message to the user
             message.channel.send(`Hey <@${userId}>, you're sending messages too fast. Please slow down!`);
 
-            // Optionally, delete the offending message (handle any errors gracefully)
+            // Deletes the message that triggered the spam detection
             message.delete().catch(console.error);
         }
     }
